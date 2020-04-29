@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-4 form-group">
                 <label>Enter a city name:</label>
-                <input type="text" class="form-control" id="cityInput">
+                <input type="text" class="form-control" id="cityInput" placeholder="City name">
                 <button type="submit" class="btn btn-primary" id="search-button">Search</button>
             </div>
             <div class="col-8" id="currentWeather"></div>
@@ -26,7 +26,9 @@
     </form>
     <section class="container">
         <div class="row">
-            <div class="col-4" id="buttons-view"></div>
+            <div class="card">
+                <ul class="list-group list-group-flush" id="buttons-view"></ul>
+            </div>
             <div class="col-8" id="fiveDayForecast"></div>
         </div> 
     </section>
