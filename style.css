@@ -4,3 +4,7 @@
     /* height: 100px;
     text-align: center; */
 };
+
+#cityInput {
+    text-transform: capitalize;
+}
