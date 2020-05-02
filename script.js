@@ -48,7 +48,30 @@ function displayWeatherInfo() {
         method: "GET"
     }).then(function(response) {
        console.log(response);
-    });
+        var apiCityName = response.name;
+        var apiTemperature = response.main.temp;
+        var apiFeelsLike = response.main.feels_like;
+        var apiHumidity = response.main.humidity + " %";
+        var apiWindSpeed = response.wind.speed + " MPH";
+        var apiLatitude = response.coord.lat;
+        var apiLongitude = response.coord.lon;
+        console.log(apiCityName, apiTemperature, apiHumidity, apiWindSpeed, apiLatitude, apiLongitude)
+        var cityH1 = $("<h1>");
+        cityH1.addClass("");
+        cityH1.attr("data-name");
+        cityH1.text(apiCityName);
+        $("#currentWeather").append(cityH1);
+    })
+    
+    // var queryURLIndex = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + apiLatitude +"&lon=" + apiLongitude;
+
+    // $.ajax({
+    //     url: queryURLIndex,
+    //     method: "GET"
+    // }).then(function(indexResponse) {
+    //     console.log(indexResponse);
+    //     // var apiUvIndex = ;
+    // })
 }
 
 // Function to display the weather info
