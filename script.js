@@ -71,18 +71,20 @@ function displayWeatherInfo() {
         var apiLatitude = response.coord.lat;
         var apiLongitude = response.coord.lon;
         console.log(apiCityName, apiTemperature, apiHumidity, apiWindSpeed, apiLatitude, apiLongitude, temperature, feelsLike, windSpeed);
+       apiUvIndex();
+       forecast();
         var cityEl = $("<h1>");
         var tempetureEl = $("<p>");
         var humdidityEl = $("<p>");
         var windSpeedEl = $("<p>");
-        var uvIndexEl = $("<p>");
         cityEl.addClass("");
         cityEl.attr("data-name");
         cityEl.text(apiCityName);
         tempetureEl.text(temperature);
         humdidityEl.text(apiHumidity);
         windSpeedEl.text(windSpeed);
-        uvIndexEl.text(apiUvIndex);
+        // uvIndexEl.text(apiUvIndex);
+        // forecastEl.text(forecast);
         $("#current-weather").append(cityEl);
         $("#current-weather").append(tempetureEl);
         $("#current-weather").append(humdidityEl);
@@ -98,10 +100,23 @@ function displayWeatherInfo() {
             }).then(function(uvIndexResponse) {
                 var uvIndexValue = uvIndexResponse.value;
                 console.log (uvIndexValue);
+                var uvIndexEl = $("<p>");
+                uvIndexEl.attr("style", "background:red");
+                uvIndexEl.text(uvIndexValue);
+                $("#current-weather").append(uvIndexEl);
         })
-        }
-        apiUvIndex()
-    })
+        };
+        function forecast() {
+            var forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
+
+            $.ajax({
+                url: forecastURL,
+                method: "GET"
+            }).then(function(forecastResponse) {
+                // var forecastValue = uvIndexResponse.value;
+                console.log(forecastResponse)
+        })
+        }    })
 }
 
 // Function to display the weather info
