@@ -36,12 +36,20 @@ $("#search-button").on("click", function(event) {
     }
 })
 
+// function to empty out the city name on main h1
+function clear() {
+    $("#current-weather").empty();
+}
+
 // Function for dumping the JSON content for each button into the div
 function displayWeatherInfo() {
 
     var city = $(this).attr("data-name");
     console.log(city);
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+    
+    // Calling the function to empty the main h1 in order to show new one
+    clear();
 
     $.ajax({
         url: queryURL,
@@ -49,18 +57,21 @@ function displayWeatherInfo() {
     }).then(function(response) {
        console.log(response);
         var apiCityName = response.name;
-        var apiTemperature = response.main.temp;
-        var apiFeelsLike = response.main.feels_like;
+        var apiTemperature = (response.main.temp - 273.15) * 9/5 + 32;
+        var temperature = apiTemperature.toFixed(2) + " °F";
+        var apiFeelsLike = (response.main.feels_like - 273.15) * 9/5 + 32;
+        var feelsLike = apiFeelsLike.toFixed(2) + " °F";
         var apiHumidity = response.main.humidity + " %";
-        var apiWindSpeed = response.wind.speed + " MPH";
+        var apiWindSpeed = response.wind.speed * 2.237;
+        var windSpeed = apiWindSpeed.toFixed(1) + " MPH";
         var apiLatitude = response.coord.lat;
         var apiLongitude = response.coord.lon;
-        console.log(apiCityName, apiTemperature, apiHumidity, apiWindSpeed, apiLatitude, apiLongitude)
+        console.log(apiCityName, apiTemperature, apiHumidity, apiWindSpeed, apiLatitude, apiLongitude, temperature, feelsLike, windSpeed)
         var cityH1 = $("<h1>");
         cityH1.addClass("");
         cityH1.attr("data-name");
         cityH1.text(apiCityName);
-        $("#currentWeather").append(cityH1);
+        $("#current-weather").append(cityH1);
     })
     
     // var queryURLIndex = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + apiLatitude +"&lon=" + apiLongitude;
