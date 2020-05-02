@@ -80,16 +80,15 @@ function displayWeatherInfo() {
         cityEl.addClass("");
         cityEl.attr("data-name");
         cityEl.text(apiCityName);
-        tempetureEl.text(temperature);
-        humdidityEl.text(apiHumidity);
-        windSpeedEl.text(windSpeed);
+        tempetureEl.text("Temperature: " + temperature);
+        humdidityEl.text("Humidity: " + apiHumidity);
+        windSpeedEl.text("Wind speed: " + windSpeed);
         // uvIndexEl.text(apiUvIndex);
         // forecastEl.text(forecast);
         $("#current-weather").append(cityEl);
         $("#current-weather").append(tempetureEl);
         $("#current-weather").append(humdidityEl);
         $("#current-weather").append(windSpeedEl);
-        $("#current-weather").append(uvIndexEl);
 
         function apiUvIndex() {
             var queryURLIndex = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + apiLatitude +"&lon=" + apiLongitude;
@@ -100,10 +99,23 @@ function displayWeatherInfo() {
             }).then(function(uvIndexResponse) {
                 var uvIndexValue = uvIndexResponse.value;
                 console.log (uvIndexValue);
-                var uvIndexEl = $("<p>");
-                uvIndexEl.attr("style", "background:red");
-                uvIndexEl.text(uvIndexValue);
+                var uvIndexEl = $("<div>");
+                var uvIndexP = $("<p>");
+                var backGround = $("<p>");
+                uvIndexEl.addClass("index-p");
+                uvIndexP.text("UV Index:");
+                backGround.text(uvIndexValue);
                 $("#current-weather").append(uvIndexEl);
+                $(".index-p").append(uvIndexP);
+                $(".index-p").append(backGround);
+                
+            if (uvIndexValue < 4) {
+                backGround.addClass("alert alert-success");
+            } if (uvIndexValue <= 6) {
+                backGround.addClass("alert alert-warning");
+            } else {
+                backGround.addClass("alert alert-danger");
+            }
         })
         };
         function forecast() {
