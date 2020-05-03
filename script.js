@@ -4,6 +4,11 @@ var citiesArray = JSON.parse(localStorage.getItem("cityName")) || [];
 // setting a varible for my API key
 var apiKey = "f9476d710a0f07f0c50dc74e1e030424";
 
+// creat a arible for date
+var utcDate = new Date();
+var monthDayYear = utcDate.toLocaleDateString();
+console.log(monthDayYear);
+
 // Function that display creatte new buttons on search
 function renderButtons() {
     $("#buttons-view").empty();
@@ -74,18 +79,21 @@ function displayWeatherInfo() {
        apiUvIndex();
        forecast();
         var cityEl = $("<h1>");
-        var tempetureEl = $("<p>");
-        var humdidityEl = $("<p>");
-        var windSpeedEl = $("<p>");
+        var tempetureEl = $("<h5>");
+        var humdidityEl = $("<h5>");
+        var windSpeedEl = $("<h5>");
+        var dateEl = $("<h5>");
         cityEl.addClass("");
         cityEl.attr("data-name");
         cityEl.text(apiCityName);
+        dateEl.text(monthDayYear);
         tempetureEl.text("Temperature: " + temperature);
         humdidityEl.text("Humidity: " + apiHumidity);
         windSpeedEl.text("Wind speed: " + windSpeed);
         // uvIndexEl.text(apiUvIndex);
         // forecastEl.text(forecast);
         $("#current-weather").append(cityEl);
+        $("#current-weather").append(dateEl);
         $("#current-weather").append(tempetureEl);
         $("#current-weather").append(humdidityEl);
         $("#current-weather").append(windSpeedEl);
@@ -100,8 +108,8 @@ function displayWeatherInfo() {
                 var uvIndexValue = uvIndexResponse.value;
                 console.log (uvIndexValue);
                 var uvIndexEl = $("<div>");
-                var uvIndexP = $("<p>");
-                var backGround = $("<p>");
+                var uvIndexP = $("<h5>");
+                var backGround = $("<h5>");
                 uvIndexEl.addClass("index-p");
                 uvIndexP.text("UV Index:");
                 backGround.text(uvIndexValue);
@@ -125,10 +133,16 @@ function displayWeatherInfo() {
                 url: forecastURL,
                 method: "GET"
             }).then(function(forecastResponse) {
-                // var forecastValue = uvIndexResponse.value;
                 console.log(forecastResponse)
+                var apiTempOne = (forecastResponse.list[2].main.temp - 273.15) * 9/5 + 32;
+                var apiHumOne = forecastResponse.list[2].main.humidity + "%";
+                var tempDayOne = apiTempOne.toFixed(2) + " °F";
+                console.log(tempDayOne);
+                console.log(apiHumOne);
+
         })
-        }    })
+        }    
+    })
 }
 
 // Function to display the weather info

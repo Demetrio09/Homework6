@@ -20,17 +20,55 @@
                 <h3>Search for a city</h3>
                 <input type="text" class="form-control" id="cityInput" placeholder="City name">
                 <button type="submit" class="btn btn-primary" id="search-button"><i class="fas fa-search"></i> Search</button>
+                <div class="card list-group list-group-flush" id="buttons-view"></div>
             </div>
             <div class="col-8" id="current-weather"></div>
         </div>        
     </section>
     <section class="container">
-        <div class="row">
-            <div class="card">
-                <div class="list-group list-group-flush" id="buttons-view"></div>
-            </div>
-            <div class="col-8" id="five-day-forecast"></div>
-        </div> 
+        <h2>5 - Day Forecast:</h2>
+                <div class="row" id="five-day-forecast">
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title" id="date"></h5>
+                          <p class="card-text"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title" id="date"></h5>
+                          <p class="card-text"></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title" id="date"></h5>
+                            <p class="card-text"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title" id="date"></h5>
+                            <p class="card-text"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title" id="date"></h5>
+                            <p class="card-text"></p>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
     </section>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
