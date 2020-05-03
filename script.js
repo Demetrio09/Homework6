@@ -6,6 +6,7 @@ var apiKey = "f9476d710a0f07f0c50dc74e1e030424";
 
 // creat a arible for date
 var utcDate = new Date();
+var tomorrow = new Date();
 var monthDayYear = utcDate.toLocaleDateString();
 console.log(monthDayYear);
 
@@ -80,7 +81,7 @@ function displayWeatherInfo() {
        forecast();
         var cityEl = $("<h1>");
         var tempetureEl = $("<h5>");
-        var humdidityEl = $("<h5>");
+        var humidityEl = $("<h5>");
         var windSpeedEl = $("<h5>");
         var dateEl = $("<h5>");
         cityEl.addClass("");
@@ -88,14 +89,14 @@ function displayWeatherInfo() {
         cityEl.text(apiCityName);
         dateEl.text(monthDayYear);
         tempetureEl.text("Temperature: " + temperature);
-        humdidityEl.text("Humidity: " + apiHumidity);
+        humidityEl.text("Humidity: " + apiHumidity);
         windSpeedEl.text("Wind speed: " + windSpeed);
         // uvIndexEl.text(apiUvIndex);
         // forecastEl.text(forecast);
         $("#current-weather").append(cityEl);
         $("#current-weather").append(dateEl);
         $("#current-weather").append(tempetureEl);
-        $("#current-weather").append(humdidityEl);
+        $("#current-weather").append(humidityEl);
         $("#current-weather").append(windSpeedEl);
 
         function apiUvIndex() {
@@ -139,7 +140,14 @@ function displayWeatherInfo() {
                 var tempDayOne = apiTempOne.toFixed(2) + " °F";
                 console.log(tempDayOne);
                 console.log(apiHumOne);
-
+                var dateForecast = tomorrow.setDate(tomorrow.getDate() + 1);
+                var dateForEl = $("#date1");
+                var tempForEl = $("#temp1");
+                var humidityForEl = $("<p>");
+                dateForEl.text(dateForecast);
+                tempForEl.text("Temperature: " + tempDayOne);
+                humidityForEl.text("Humidity: " + apiHumOne);
+                $("#forecast1").append(humidityForEl);
         })
         }    
     })
