@@ -144,7 +144,7 @@ function displayWeatherInfo() {
                 var dateForEl = $("#date" + [i]);
                 var tempForEl = $("#temp" + [i]);
                 var humidityForEl = $("<p>");
-                dateForEl.text(dateForecast);
+                // dateForEl.text(dateForecast);
                 tempForEl.text("Temperature: " + tempForecast);
                 humidityForEl.text("Humidity: " + apiHumForecast);
                 $("#forecast" + [i]).append(humidityForEl);
