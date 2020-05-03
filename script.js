@@ -6,7 +6,6 @@ var apiKey = "f9476d710a0f07f0c50dc74e1e030424";
 
 // creat a arible for date
 var utcDate = new Date();
-var tomorrow = new Date();
 var monthDayYear = utcDate.toLocaleDateString();
 console.log(monthDayYear);
 
@@ -135,19 +134,22 @@ function displayWeatherInfo() {
                 method: "GET"
             }).then(function(forecastResponse) {
                 console.log(forecastResponse)
-                var apiTempOne = (forecastResponse.list[2].main.temp - 273.15) * 9/5 + 32;
-                var apiHumOne = forecastResponse.list[2].main.humidity + "%";
-                var tempDayOne = apiTempOne.toFixed(2) + " °F";
-                console.log(tempDayOne);
-                console.log(apiHumOne);
-                var dateForecast = tomorrow.setDate(tomorrow.getDate() + 1);
-                var dateForEl = $("#date1");
-                var tempForEl = $("#temp1");
+                for (var i = 0; i < 5; i++) {
+                    // const element = 5[i];
+                var apiTempForecast = (forecastResponse.list[2 + i + 8].main.temp - 273.15) * 9/5 + 32;
+                var apiHumForecast = forecastResponse.list[2 + i + 8].main.humidity + "%";
+                console.log(apiTempForecast, apiHumForecast);
+                var tempForecast = apiTempForecast.toFixed(2) + " °F";
+                var dateForecast = utcDate.setDate(utcDate.getDate() + 1);
+                var dateForEl = $("#date" + [i]);
+                var tempForEl = $("#temp" + [i]);
                 var humidityForEl = $("<p>");
                 dateForEl.text(dateForecast);
-                tempForEl.text("Temperature: " + tempDayOne);
-                humidityForEl.text("Humidity: " + apiHumOne);
-                $("#forecast1").append(humidityForEl);
+                tempForEl.text("Temperature: " + tempForecast);
+                humidityForEl.text("Humidity: " + apiHumForecast);
+                $("#forecast" + [i]).append(humidityForEl);
+                }
+                
         })
         }    
     })
